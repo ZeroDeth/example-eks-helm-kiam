@@ -42,14 +42,14 @@ echo "Found kiam server node instance role: $KIAM_SERVER_NODE_INSTANCE_ROLE"
 
 echo "Ensure that the nodes from the worker groups can join the cluster."
 # Note, the file must contain the above node instance role so we insert it before applying the template.
-cp templates/aws-auth-cm.yaml /tmp/aws-auth-cm-temp.yaml
-sed -i 's@KIAM_SERVER_NODE_INSTANCE_ROLE@'$KIAM_SERVER_NODE_INSTANCE_ROLE'@g' /tmp/aws-auth-cm-temp.yaml
-sed -i 's@NODE_INSTANCE_ROLE@'$NODE_INSTANCE_ROLE'@g' /tmp/aws-auth-cm-temp.yaml
-kubectl apply -f /tmp/aws-auth-cm-temp.yaml
-rm /tmp/aws-auth-cm-temp.yaml
+cp templates/aws-auth-cm.yaml aws-auth-cm-temp.yaml
+sed -i 's@KIAM_SERVER_NODE_INSTANCE_ROLE@'$KIAM_SERVER_NODE_INSTANCE_ROLE'@g' aws-auth-cm-temp.yaml
+sed -i 's@NODE_INSTANCE_ROLE@'$NODE_INSTANCE_ROLE'@g' aws-auth-cm-temp.yaml
+kubectl apply -f aws-auth-cm-temp.yaml
+# rm outputs/aws-auth-cm-temp.yaml
 
 echo "Wait for the nodes to become visible and Ready."
-while [ "$(kubectl get nodes | grep -c ' Ready ')" != 2 ]; do echo "$(date): Looking for running nodes..." && sleep 2 ; done
+while [ "$(kubectl get nodes | grep -c ' Ready ')" != 3 ]; do echo "$(date): Looking for running nodes..." && sleep 2 ; done
 
 echo "Nodes all found to be Ready."
 kubectl get nodes

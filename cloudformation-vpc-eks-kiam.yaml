@@ -16,7 +16,7 @@ Parameters:
   AMIID:
     Type: AWS::EC2::Image::Id
     Description: AMI id for the node instances (Latest can be found here https://docs.aws.amazon.com/eks/latest/userguide/getting-started.html#eks-launch-workers)
-    Default: ami-098fb7e9b507904e7
+    Default: ami-0147919d2ff9a6ad5
 
   VpcBlock:
     Type: String
@@ -55,7 +55,7 @@ Parameters:
 
   EKSVersion:
     Type: String
-    Default: "1.11"
+    Default: "1.13"
     Description: Kubernetes Cluster Version
 
   BootstrapArguments:
@@ -66,7 +66,7 @@ Parameters:
   NodeVolumeSize:
     Type: Number
     Description: Node volume size in GB
-    Default: 20
+    Default: 60
 
 Metadata:
   AWS::CloudFormation::Interface:
@@ -685,7 +685,7 @@ Resources:
       AssociatePublicIpAddress: 'false'
       IamInstanceProfile: !Ref NodeInstanceProfile
       ImageId: !Ref 'AMIID'
-      InstanceType: 't3.medium'
+      InstanceType: 't3.large'
       KeyName: !Ref KeyName
       SecurityGroups:
       - !Ref NodeSecurityGroup
@@ -716,10 +716,10 @@ Resources:
     - EKSCluster
     - KiamServerNodeLaunchConfig
     Properties:
-      DesiredCapacity: 1
+      DesiredCapacity: 2
       LaunchConfigurationName: !Ref KiamServerNodeLaunchConfig
-      MinSize: 1
-      MaxSize: 2
+      MinSize: 2
+      MaxSize: 3
       VPCZoneIdentifier:
       - !Ref PrivateSubnet01
       - !Ref PrivateSubnet02
@@ -742,7 +742,7 @@ Resources:
       AssociatePublicIpAddress: 'false'
       IamInstanceProfile: !Ref KiamServerNodeInstanceProfile
       ImageId: !Ref 'AMIID'
-      InstanceType: 't3.medium'
+      InstanceType: 't3.large'
       KeyName: !Ref KeyName
       SecurityGroups:
       - !Ref KiamServerNodeSecurityGroup

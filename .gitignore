@@ -1,1 +1,18 @@
-.idea
+### Ignore Outputs working directories for sample KIAM yaml files ###
+**/outputs
+
+### Ignore Cloudformation outputs ###
+**/aws-auth-cm-*.yaml
+**/kubeconfig_*
+
+### Ignore VSCode files ###
+**/.vscode
+
+### Ignore JetBrains files ###
+**/.idea
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride

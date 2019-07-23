@@ -1,16 +1,16 @@
 ## A repo with scripts and templates to configure Kiam for an EKS cluster, deployed using CloudFormation and Helm.
 
-To set up a CloudFormation created VPC with an EKS cluster and kiam installed and configured, 
+To set up a CloudFormation created VPC with an EKS cluster and kiam installed and configured,
 perform the following:
 
 ```bash
 # Clone the repository
-git clone git@github.com:bambooengineering/example-eks-helm-kiam.git
+git clone git@github.com:ZeroDeth/example-eks-helm-kiam.git
 cd example-eks-helm-kiam
 
 # Set the region for your cluster and the existing AWS SSH key you wish to use
-export AWS_DEFAULT_REGION="eu-west-1"
-export KEY_NAME=some-key
+export AWS_DEFAULT_REGION="eu-west-2"
+export KEY_NAME=sherif-keypair
 
 # Run the script. It will take about 15 minutes.
 ./setup.sh
